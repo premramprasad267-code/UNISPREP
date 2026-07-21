@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="UniPrep — One Platform. Every University. Smarter Preparation. Access notes, previous year papers, MCQ practice tests, and AI-powered doubt solving.">
+  <meta name="keywords" content="university preparation, study notes, previous year papers, MCQ practice, AI tutor, exam preparation">
+  <title>UniPrep — One Platform. Every University. Smarter Preparation.</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============================================
+       NAVBAR
+       ============================================ -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container navbar__inner">
+      <!-- Logo -->
+      <a href="index.html" class="navbar__logo" aria-label="UniPrep Home">
+        <span class="navbar__logo-icon">
+          <i data-lucide="graduation-cap" style="width:20px;height:20px;"></i>
+        </span>
+        UniPrep
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="navbar__nav" id="nav-menu" role="menubar">
+        <a href="#hero" class="navbar__link active" role="menuitem">Home</a>
+        <a href="#features" class="navbar__link" role="menuitem">Resources</a>
+        <a href="#how-it-works" class="navbar__link" role="menuitem">Practice</a>
+        <a href="#ai-section" class="navbar__link" role="menuitem">AI Tutor</a>
+        <a href="#community" class="navbar__link" role="menuitem">Community</a>
+        <!-- Mobile-only CTA links (visible only in mobile menu) -->
+        <div class="navbar__mobile-actions">
+          <a href="login.html" class="btn btn--ghost">Login</a>
+          <a href="login.html" class="btn btn--primary">Start Preparing</a>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="navbar__actions">
+        <a href="login.html" class="btn btn--ghost">Login</a>
+        <a href="login.html" class="btn btn--primary">Start Preparing</a>
+      </div>
+
+      <!-- Mobile Toggle -->
+      <button class="navbar__toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+        <span class="navbar__toggle-line"></span>
+        <span class="navbar__toggle-line"></span>
+        <span class="navbar__toggle-line"></span>
+      </button>
+    </div>
+  </nav>
+
+
+  <!-- ============================================
+       HERO SECTION
+       ============================================ -->
+  <section class="hero" id="hero">
+    <div class="container hero__inner">
+      <!-- Hero Content -->
+      <div class="hero__content reveal">
+        <span class="hero__badge">
+          <i data-lucide="sparkles" style="width:16px;height:16px;"></i>
+          Your Complete University Study Companion
+        </span>
+
+        <h1 class="hero__title">
+          Everything You Need to <span class="gradient-text">Ace Your University Exams.</span>
+        </h1>
+
+        <p class="hero__subtitle">
+          Access notes, previous year papers, practice MCQs, and clear your doubts with AI — all in one place.
+        </p>
+
+        <div class="hero__actions">
+          <a href="login.html" class="btn btn--primary btn--lg">
+            <i data-lucide="rocket" style="width:18px;height:18px;"></i>
+            Start Preparing
+          </a>
+          <a href="#features" class="btn btn--secondary btn--lg">
+            <i data-lucide="compass" style="width:18px;height:18px;"></i>
+            Explore Resources
+          </a>
+        </div>
+      </div>
+
+      <!-- Visual Section -->
+      <div class="hero__visual reveal">
+        <!-- Dashboard Mockup (HTML/CSS only) -->
+        <div class="dashboard-mockup">
+          <div class="dashboard__header">
+            <div class="dashboard__header-top">
+              <span class="dashboard__title">UniPrep Dashboard</span>
+              <span class="dashboard__status">
+                <span class="dashboard__status-dot"></span>
+                Online
+              </span>
+            </div>
+            <span class="dashboard__course">BCA • Semester 2</span>
+          </div>
+
+          <div class="dashboard__body">
+            <!-- Subjects -->
+            <span class="dashboard__section-label">Subjects</span>
+            <div class="dashboard__subjects">
+              <div class="dashboard__subject">
+                <span class="dashboard__subject-icon dashboard__subject-icon--blue">
+                  <i data-lucide="database" style="width:16px;height:16px;"></i>
+                </span>
+                <span class="dashboard__subject-text">Database Management Systems</span>
+                <i data-lucide="chevron-right" class="dashboard__subject-arrow" style="width:16px;height:16px;"></i>
+              </div>
+              <div class="dashboard__subject">
+                <span class="dashboard__subject-icon dashboard__subject-icon--green">
+                  <i data-lucide="binary" style="width:16px;height:16px;"></i>
+                </span>
+                <span class="dashboard__subject-text">Data Structures</span>
+                <i data-lucide="chevron-right" class="dashboard__subject-arrow" style="width:16px;height:16px;"></i>
+              </div>
+              <div class="dashboard__subject">
+                <span class="dashboard__subject-icon dashboard__subject-icon--purple">
+                  <i data-lucide="monitor" style="width:16px;height:16px;"></i>
+                </span>
+                <span class="dashboard__subject-text">Operating Systems</span>
+                <i data-lucide="chevron-right" class="dashboard__subject-arrow" style="width:16px;height:16px;"></i>
+              </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <span class="dashboard__section-label">Quick Actions</span>
+            <div class="dashboard__quick-actions">
+              <div class="dashboard__action">
+                <i data-lucide="book-open" class="dashboard__action-icon" style="width:22px;height:22px;"></i>
+                <span class="dashboard__action-label">Notes</span>
+              </div>
+              <div class="dashboard__action">
+                <i data-lucide="file-text" class="dashboard__action-icon" style="width:22px;height:22px;"></i>
+                <span class="dashboard__action-label">Question Papers</span>
+              </div>
+              <div class="dashboard__action">
+                <i data-lucide="circle-check-big" class="dashboard__action-icon" style="width:22px;height:22px;"></i>
+                <span class="dashboard__action-label">Practice MCQs</span>
+              </div>
+              <div class="dashboard__action">
+                <i data-lucide="bot" class="dashboard__action-icon" style="width:22px;height:22px;"></i>
+                <span class="dashboard__action-label">Ask AI</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       STATS / TRUST SECTION
+       ============================================ -->
+  <!-- NOTE: These are placeholder/demo metrics for MVP demonstration.
+       Replace with real data once backend integration is complete. -->
+  <section class="stats section" id="stats">
+    <div class="container">
+      <div class="stats__grid">
+        <div class="stats__item reveal">
+          <div class="stats__number"><span class="gradient-text">10+</span></div>
+          <div class="stats__label">Universities</div>
+        </div>
+        <div class="stats__item reveal">
+          <div class="stats__number"><span class="gradient-text">500+</span></div>
+          <div class="stats__label">Resources</div>
+        </div>
+        <div class="stats__item reveal">
+          <div class="stats__number"><span class="gradient-text">1000+</span></div>
+          <div class="stats__label">Practice Questions</div>
+        </div>
+        <div class="stats__item reveal">
+          <div class="stats__number"><span class="gradient-text">24/7</span></div>
+          <div class="stats__label">AI Study Assistant</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       FEATURES SECTION
+       ============================================ -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section__header reveal">
+        <span class="section__badge">
+          <i data-lucide="layout-grid" style="width:14px;height:14px;"></i>
+          Features
+        </span>
+        <h2 class="section__title">Everything You Need to <span class="gradient-text">Prepare Better</span></h2>
+        <p class="section__subtitle">From study materials to AI-powered learning — UniPrep has you covered.</p>
+      </div>
+
+      <div class="features__grid reveal-stagger">
+        <!-- Feature 1: Study Resources -->
+        <div class="card reveal">
+          <div class="card__icon">
+            <i data-lucide="book-open" style="width:24px;height:24px;"></i>
+          </div>
+          <h3 class="card__title">Study Resources</h3>
+          <p class="card__text">Access organized notes, syllabus and academic materials curated for your university and course.</p>
+        </div>
+
+        <!-- Feature 2: Previous Year Papers -->
+        <div class="card reveal">
+          <div class="card__icon" style="background:#f5f3ff;color:#8b5cf6;">
+            <i data-lucide="file-text" style="width:24px;height:24px;"></i>
+          </div>
+          <h3 class="card__title">Previous Year Papers</h3>
+          <p class="card__text">Prepare using university-specific previous question papers organized by subject and semester.</p>
+        </div>
+
+        <!-- Feature 3: MCQ Practice -->
+        <div class="card reveal">
+          <div class="card__icon" style="background:#ecfdf5;color:#059669;">
+            <i data-lucide="circle-check-big" style="width:24px;height:24px;"></i>
+          </div>
+          <h3 class="card__title">MCQ Practice</h3>
+          <p class="card__text">Test your knowledge with subject and topic-based quizzes designed for exam readiness.</p>
+        </div>
+
+        <!-- Feature 4: UniPrep AI -->
+        <div class="card reveal">
+          <div class="card__icon" style="background:#fff7ed;color:#ea580c;">
+            <i data-lucide="bot" style="width:24px;height:24px;"></i>
+          </div>
+          <h3 class="card__title">UniPrep AI</h3>
+          <p class="card__text">Get concepts explained and doubts solved instantly using our AI-powered study assistant.</p>
+        </div>
+
+        <!-- Feature 5: Student Community -->
+        <div class="card reveal">
+          <div class="card__icon" style="background:#fdf2f8;color:#db2777;">
+            <i data-lucide="users" style="width:24px;height:24px;"></i>
+          </div>
+          <h3 class="card__title">Student Community</h3>
+          <p class="card__text">Ask questions, share knowledge, and learn collaboratively with other university students.</p>
+        </div>
+
+        <!-- Feature 6: Smart Organization -->
+        <div class="card reveal">
+          <div class="card__icon" style="background:#eff6ff;color:#2563eb;">
+            <i data-lucide="folder-tree" style="width:24px;height:24px;"></i>
+          </div>
+          <h3 class="card__title">Smart Organization</h3>
+          <p class="card__text">Resources organized by University → Course → Semester → Subject for effortless navigation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       HOW IT WORKS SECTION
+       ============================================ -->
+  <section class="section how-it-works" id="how-it-works">
+    <div class="container">
+      <div class="section__header reveal">
+        <span class="section__badge">
+          <i data-lucide="route" style="width:14px;height:14px;"></i>
+          How It Works
+        </span>
+        <h2 class="section__title">Start Preparing in <span class="gradient-text">4 Simple Steps</span></h2>
+        <p class="section__subtitle">UniPrep makes academic preparation effortless and organized.</p>
+      </div>
+
+      <div class="steps reveal-stagger">
+        <div class="step reveal">
+          <div class="step__number">1</div>
+          <div class="step__icon">
+            <i data-lucide="school" style="width:28px;height:28px;"></i>
+          </div>
+          <h3 class="step__title">Select Your University</h3>
+          <p class="step__text">Choose from our growing list of supported universities.</p>
+        </div>
+
+        <div class="step reveal">
+          <div class="step__number">2</div>
+          <div class="step__icon">
+            <i data-lucide="book-marked" style="width:28px;height:28px;"></i>
+          </div>
+          <h3 class="step__title">Choose Course & Semester</h3>
+          <p class="step__text">Pick your specific course and current semester.</p>
+        </div>
+
+        <div class="step reveal">
+          <div class="step__number">3</div>
+          <div class="step__icon">
+            <i data-lucide="library" style="width:28px;height:28px;"></i>
+          </div>
+          <h3 class="step__title">Access Study Resources</h3>
+          <p class="step__text">Browse notes, papers, and practice questions.</p>
+        </div>
+
+        <div class="step reveal">
+          <div class="step__number">4</div>
+          <div class="step__icon">
+            <i data-lucide="trending-up" style="width:28px;height:28px;"></i>
+          </div>
+          <h3 class="step__title">Learn, Practice & Improve</h3>
+          <p class="step__text">Study smart with AI assistance and community support.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       AI FEATURE SECTION
+       ============================================ -->
+  <section class="section ai-section" id="ai-section">
+    <div class="container">
+      <div class="ai__inner">
+        <!-- AI Content -->
+        <div class="ai__content reveal">
+          <div class="section__header">
+            <span class="section__badge">
+              <i data-lucide="sparkles" style="width:14px;height:14px;"></i>
+              Powered by AI
+            </span>
+            <h2 class="section__title">Your Personal <span style="color:#a78bfa;">AI Study Assistant</span></h2>
+            <p class="section__subtitle">Get instant explanations, exam-ready answers, MCQ generation, and concept summaries — all powered by AI.</p>
+          </div>
+
+          <div class="ai__actions-grid">
+            <div class="ai__action-chip">
+              <i data-lucide="lightbulb"></i>
+              Explain Simply
+            </div>
+            <div class="ai__action-chip">
+              <i data-lucide="pen-line"></i>
+              Exam Answer
+            </div>
+            <div class="ai__action-chip">
+              <i data-lucide="list-checks"></i>
+              Generate MCQs
+            </div>
+            <div class="ai__action-chip">
+              <i data-lucide="file-down"></i>
+              Summarize
+            </div>
+          </div>
+
+          <a href="login.html" class="btn btn--white btn--lg">
+            <i data-lucide="bot" style="width:18px;height:18px;"></i>
+            Ask UniPrep AI
+          </a>
+        </div>
+
+        <!-- AI Chat Mockup -->
+        <div class="ai-chat reveal">
+          <div class="ai-chat__header">
+            <span class="ai-chat__header-icon">
+              <i data-lucide="bot" style="width:18px;height:18px;color:#fff;"></i>
+            </span>
+            <div>
+              <div class="ai-chat__header-text">UniPrep AI</div>
+              <div class="ai-chat__header-status">Always ready to help</div>
+            </div>
+          </div>
+
+          <div class="ai-chat__messages">
+            <!-- Student message -->
+            <div class="ai-chat__message ai-chat__message--user">
+              Explain normalization in DBMS for a 7-mark exam answer.
+            </div>
+
+            <!-- AI response -->
+            <div class="ai-chat__message ai-chat__message--ai">
+              <strong>Normalization in DBMS</strong>
+              <p>Normalization is the process of organizing data to minimize redundancy and dependency.</p>
+              <ul>
+                <li><strong>Definition:</strong> Systematic decomposition of tables</li>
+                <li><strong>Types:</strong> 1NF, 2NF, 3NF, BCNF</li>
+                <li><strong>Example:</strong> Student → Course mapping</li>
+                <li><strong>Advantages:</strong> Reduces anomalies, ensures consistency</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="ai-chat__input">
+            <div class="ai-chat__input-field">Ask anything about your subjects...</div>
+            <span class="ai-chat__input-btn">
+              <i data-lucide="send" style="width:16px;height:16px;"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       ACADEMIC ORGANIZATION SECTION
+       ============================================ -->
+  <section class="section" id="organization">
+    <div class="container">
+      <div class="section__header reveal">
+        <span class="section__badge">
+          <i data-lucide="layers" style="width:14px;height:14px;"></i>
+          Smart Structure
+        </span>
+        <h2 class="section__title">Organized for <span class="gradient-text">Your University</span></h2>
+        <p class="section__subtitle">Every resource is structured by university, course, semester, and subject — so you find exactly what you need.</p>
+      </div>
+
+      <!-- Organization Flow -->
+      <div class="org__flow reveal">
+        <div class="org__flow-item">
+          <div class="org__flow-icon">
+            <i data-lucide="school" style="width:22px;height:22px;"></i>
+          </div>
+          <span class="org__flow-label">University</span>
+        </div>
+        <i data-lucide="arrow-right" class="org__flow-arrow" style="width:24px;height:24px;"></i>
+        <div class="org__flow-item">
+          <div class="org__flow-icon">
+            <i data-lucide="book-marked" style="width:22px;height:22px;"></i>
+          </div>
+          <span class="org__flow-label">Course</span>
+        </div>
+        <i data-lucide="arrow-right" class="org__flow-arrow" style="width:24px;height:24px;"></i>
+        <div class="org__flow-item">
+          <div class="org__flow-icon">
+            <i data-lucide="calendar" style="width:22px;height:22px;"></i>
+          </div>
+          <span class="org__flow-label">Semester</span>
+        </div>
+        <i data-lucide="arrow-right" class="org__flow-arrow" style="width:24px;height:24px;"></i>
+        <div class="org__flow-item">
+          <div class="org__flow-icon">
+            <i data-lucide="book-open" style="width:22px;height:22px;"></i>
+          </div>
+          <span class="org__flow-label">Subject</span>
+        </div>
+        <i data-lucide="arrow-right" class="org__flow-arrow" style="width:24px;height:24px;"></i>
+        <div class="org__flow-item">
+          <div class="org__flow-icon" style="background:#ecfdf5;color:#059669;">
+            <i data-lucide="file-stack" style="width:22px;height:22px;"></i>
+          </div>
+          <span class="org__flow-label">Resources</span>
+        </div>
+      </div>
+
+      <!-- Example Card -->
+      <div class="org__example reveal">
+        <div class="org__example-header">
+          <h4>Sandip University</h4>
+          <p>Your personalized study space</p>
+        </div>
+        <div class="org__example-body">
+          <div class="org__breadcrumb">
+            <span class="org__breadcrumb-item">
+              <i data-lucide="school" style="width:14px;height:14px;"></i>
+              Sandip University
+            </span>
+            <i data-lucide="chevron-right" class="org__breadcrumb-sep" style="width:14px;height:14px;"></i>
+            <span class="org__breadcrumb-item">BCA</span>
+            <i data-lucide="chevron-right" class="org__breadcrumb-sep" style="width:14px;height:14px;"></i>
+            <span class="org__breadcrumb-item">Semester 2</span>
+            <i data-lucide="chevron-right" class="org__breadcrumb-sep" style="width:14px;height:14px;"></i>
+            <span class="org__breadcrumb-item">DBMS</span>
+          </div>
+          <div class="org__resource-chips">
+            <span class="org__resource-chip org__resource-chip--notes">
+              <i data-lucide="book-open" style="width:14px;height:14px;"></i>
+              Notes
+            </span>
+            <span class="org__resource-chip org__resource-chip--pyqs">
+              <i data-lucide="file-text" style="width:14px;height:14px;"></i>
+              PYQs
+            </span>
+            <span class="org__resource-chip org__resource-chip--mcqs">
+              <i data-lucide="circle-check-big" style="width:14px;height:14px;"></i>
+              MCQs
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       COMMUNITY CONTRIBUTION SECTION
+       ============================================ -->
+  <section class="section community" id="community">
+    <div class="container">
+      <div class="section__header reveal">
+        <span class="section__badge">
+          <i data-lucide="heart-handshake" style="width:14px;height:14px;"></i>
+          Community Powered
+        </span>
+        <h2 class="section__title">UniPrep Grows With <span class="gradient-text">Student Contributions</span></h2>
+        <p class="section__subtitle">Every resource on UniPrep is contributed and verified by students and administrators to ensure quality.</p>
+      </div>
+
+      <div class="community__flow reveal-stagger">
+        <div class="community__flow-step reveal">
+          <div class="community__flow-icon">
+            <i data-lucide="upload" style="width:24px;height:24px;"></i>
+          </div>
+          <h3 class="community__flow-title">Student Uploads</h3>
+          <p class="community__flow-text">Students submit notes, papers, or other resources.</p>
+        </div>
+
+        <div class="community__flow-step reveal">
+          <div class="community__flow-icon">
+            <i data-lucide="shield-check" style="width:24px;height:24px;"></i>
+          </div>
+          <h3 class="community__flow-title">Admin Verification</h3>
+          <p class="community__flow-text">Admins review and verify resource quality.</p>
+        </div>
+
+        <div class="community__flow-step reveal">
+          <div class="community__flow-icon">
+            <i data-lucide="check-circle" style="width:24px;height:24px;"></i>
+          </div>
+          <h3 class="community__flow-title">Resource Published</h3>
+          <p class="community__flow-text">Approved resources go live on the platform.</p>
+        </div>
+
+        <div class="community__flow-step reveal">
+          <div class="community__flow-icon">
+            <i data-lucide="users" style="width:24px;height:24px;"></i>
+          </div>
+          <h3 class="community__flow-title">Students Benefit</h3>
+          <p class="community__flow-text">The entire community gets access to quality study materials.</p>
+        </div>
+      </div>
+
+      <div class="reveal" style="text-align:center;">
+        <a href="login.html" class="btn btn--primary btn--lg">
+          <i data-lucide="upload" style="width:18px;height:18px;"></i>
+          Contribute Resources
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       FINAL CTA SECTION
+       ============================================ -->
+  <section class="section final-cta" id="cta">
+    <div class="container">
+      <div class="final-cta__content reveal">
+        <h2 class="final-cta__title">Your Next Exam Starts With <span style="color:#a78bfa;">Better Preparation.</span></h2>
+        <p class="final-cta__text">Join UniPrep and keep everything you need for university preparation in one place.</p>
+        <div class="final-cta__actions">
+          <a href="login.html" class="btn btn--white btn--lg">
+            <i data-lucide="rocket" style="width:18px;height:18px;"></i>
+            Start Preparing for Free
+          </a>
+          <a href="#features" class="btn btn--outline-white btn--lg">
+            <i data-lucide="compass" style="width:18px;height:18px;"></i>
+            Explore Resources
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+        <!-- Brand -->
+        <div class="footer__brand">
+          <div class="footer__logo">
+            <span class="footer__logo-icon">
+              <i data-lucide="graduation-cap" style="width:18px;height:18px;"></i>
+            </span>
+            UniPrep
+          </div>
+          <p class="footer__brand-text">One Platform. Every University. Smarter Preparation. Access everything you need to ace your university exams.</p>
+        </div>
+
+        <!-- Product -->
+        <div class="footer__column">
+          <h4 class="footer__column-title">Product</h4>
+          <nav class="footer__links" aria-label="Product links">
+            <a href="#features" class="footer__link">Resources</a>
+            <a href="#how-it-works" class="footer__link">Practice</a>
+            <a href="#ai-section" class="footer__link">AI Tutor</a>
+            <a href="#community" class="footer__link">Community</a>
+          </nav>
+        </div>
+
+        <!-- Platform -->
+        <div class="footer__column">
+          <h4 class="footer__column-title">Platform</h4>
+          <nav class="footer__links" aria-label="Platform links">
+            <a href="#" class="footer__link">About</a>
+            <a href="#community" class="footer__link">Contribute</a>
+            <a href="#" class="footer__link">Contact</a>
+          </nav>
+        </div>
+
+        <!-- Legal -->
+        <div class="footer__column">
+          <h4 class="footer__column-title">Legal</h4>
+          <nav class="footer__links" aria-label="Legal links">
+            <a href="#" class="footer__link">Privacy</a>
+            <a href="#" class="footer__link">Terms</a>
+          </nav>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p>Built for students, by students.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Initialize Lucide Icons -->
+  <script src="js/main.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

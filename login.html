@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Login to UniPrep — Access your university study resources, AI tutor, and MCQ practice.">
+  <title>Login — UniPrep</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+  <main class="login-page">
+    <div class="login-card">
+      <div class="login__header">
+        <a href="index.html" class="login__logo" aria-label="UniPrep Home">
+          <span class="login__logo-icon">
+            <i data-lucide="graduation-cap" style="width:22px;height:22px;"></i>
+          </span>
+          UniPrep
+        </a>
+        <h1 class="login__title">Welcome Back</h1>
+        <p class="login__subtitle">Sign in to access your study resources</p>
+      </div>
+
+      <div class="login__body">
+        <!-- Login form — frontend-only, no backend integration yet -->
+        <form class="login__form" id="login-form" action="#" method="POST" novalidate>
+          <div class="form-group">
+            <label for="email" class="form-group__label">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-group__input"
+              placeholder="you@university.edu"
+              autocomplete="email"
+              required
+              aria-required="true"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="form-group__label">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-group__input"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+              aria-required="true"
+            >
+          </div>
+
+          <div class="login__options">
+            <label class="login__remember">
+              <input type="checkbox" name="remember" id="remember">
+              Remember me
+            </label>
+            <a href="#" class="login__forgot">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--lg login__submit">
+            <i data-lucide="log-in" style="width:18px;height:18px;"></i>
+            Sign In
+          </button>
+        </form>
+
+        <div class="login__divider">
+          <span class="login__divider-line"></span>
+          <span class="login__divider-text">New to UniPrep?</span>
+          <span class="login__divider-line"></span>
+        </div>
+
+        <p class="login__signup-text">
+          <a href="#" class="login__signup-link">Create an account</a> and start preparing today.
+        </p>
+      </div>
+    </div>
+
+    <div class="login__back">
+      <a href="index.html" class="login__back-link">
+        <i data-lucide="arrow-left" style="width:16px;height:16px;"></i>
+        Back to Home
+      </a>
+    </div>
+  </main>
+
+  <script>
+    lucide.createIcons();
+
+    document.getElementById('login-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const submitBtn = this.querySelector('button[type="submit"]');
+
+      if (!email || !password) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      // Add loading state
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<i data-lucide="loader-2" class="spin" style="width:18px;height:18px;"></i> Signing In...';
+      submitBtn.disabled = true;
+      lucide.createIcons();
+
+      try {
+        const response = await fetch('http://127.0.0.1:5000/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('userName', data.name);
+          window.location.href = 'index.html';
+        } else {
+          alert(data.error || 'Login failed.');
+        }
+      } catch (err) {
+        alert('Error connecting to server. Please try again later.');
+      } finally {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>
