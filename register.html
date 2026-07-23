@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Login to UniPrep — Access your university study resources, AI tutor, and MCQ practice.">
-  <title>Login — UniPrep</title>
+  <meta name="description" content="Register to UniPrep — Access your university study resources, AI tutor, and MCQ practice.">
+  <title>Register — UniPrep</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,13 +28,25 @@
           </span>
           UniPrep
         </a>
-        <h1 class="login__title">Welcome Back</h1>
-        <p class="login__subtitle">Sign in to access your study resources</p>
+        <h1 class="login__title">Create Account</h1>
+        <p class="login__subtitle">Sign up to access your study resources</p>
       </div>
 
       <div class="login__body">
         <!-- Login form — frontend-only, no backend integration yet -->
-        <form class="login__form" id="login-form" action="#" method="POST" novalidate>
+        <form class="login__form" id="register-form" action="#" method="POST" novalidate>
+          <div class="form-group">
+            <label for="name" class="form-group__label">Full Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-group__input"
+              placeholder="John Doe"
+              required
+              aria-required="true"
+            >
+          </div>
           <div class="form-group">
             <label for="email" class="form-group__label">Email Address</label>
             <input
@@ -63,20 +75,6 @@
             >
           </div>
 
-          <div class="form-group" style="margin-bottom: 1.5rem;">
-            <label class="form-group__label">Login As</label>
-            <div style="display: flex; gap: 1.5rem; margin-top: 0.5rem;">
-              <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.95rem; color: var(--gray-700);">
-                <input type="radio" name="role" value="student" checked style="accent-color: var(--primary-600); width: 16px; height: 16px;">
-                Student
-              </label>
-              <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.95rem; color: var(--gray-700);">
-                <input type="radio" name="role" value="admin" style="accent-color: var(--primary-600); width: 16px; height: 16px;">
-                Admin
-              </label>
-            </div>
-          </div>
-
           <div class="login__options">
             <label class="login__remember">
               <input type="checkbox" name="remember" id="remember">
@@ -93,12 +91,12 @@
 
         <div class="login__divider">
           <span class="login__divider-line"></span>
-          <span class="login__divider-text">New to UniPrep?</span>
+          <span class="login__divider-text">Already have an account?</span>
           <span class="login__divider-line"></span>
         </div>
 
         <p class="login__signup-text">
-          <a href="register.html" class="login__signup-link">Create an account</a> and start preparing today.
+          <a href="login.html" class="login__signup-link">Sign in here</a> to continue preparing.
         </p>
       </div>
     </div>
@@ -114,54 +112,39 @@
   <script>
     lucide.createIcons();
 
-    document.getElementById('login-form').addEventListener('submit', async function(e) {
+    document.getElementById('register-form').addEventListener('submit', async function(e) {
       e.preventDefault();
       
+      const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
       const submitBtn = this.querySelector('button[type="submit"]');
 
-      const role = document.querySelector('input[name="role"]:checked').value;
-
-      if (!email || !password) {
+      if (!name || !email || !password) {
         alert('Please fill in all fields.');
         return;
       }
 
       // Add loading state
       const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<i data-lucide="loader-2" class="spin" style="width:18px;height:18px;"></i> Signing In...';
+      submitBtn.innerHTML = '<i data-lucide="loader-2" class="spin" style="width:18px;height:18px;"></i> Creating Account...';
       submitBtn.disabled = true;
       lucide.createIcons();
 
       try {
-        const response = await fetch('http://127.0.0.1:5000/api/auth/login', {
+        const response = await fetch('http://127.0.0.1:5000/api/auth/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
+          body: JSON.stringify({ name, email, password })
         });
 
         const data = await response.json();
 
         if (response.ok) {
-          if (role === 'admin' && !data.is_admin) {
-             alert('Access denied: You are not authorized as an administrator.');
-             submitBtn.innerHTML = originalText;
-             submitBtn.disabled = false;
-             lucide.createIcons();
-             return;
-          }
-          
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('userName', data.name);
-          
-          if (role === 'admin') {
-              window.location.href = 'admin.html';
-          } else {
-              window.location.href = 'index.html';
-          }
+          alert('Account created successfully! Please login.');
+          window.location.href = 'login.html';
         } else {
-          alert(data.error || 'Login failed.');
+          alert(data.error || 'Registration failed.');
         }
       } catch (err) {
         alert('Error connecting to server. Please try again later.');

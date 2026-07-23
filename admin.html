@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — UniPrep</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout" style="display: none;">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar__header">
+        <a href="index.html" class="navbar__logo">
+          <span class="navbar__logo-icon">
+            <i data-lucide="graduation-cap" style="width:20px;height:20px;"></i>
+          </span>
+          UniPrep Admin
+        </a>
+      </div>
+      <nav class="admin-sidebar__nav">
+        <button class="admin-nav-item active" data-tab="subjects">
+          <i data-lucide="book" style="width:18px;height:18px;"></i> Subjects
+        </button>
+        <button class="admin-nav-item" data-tab="resources">
+          <i data-lucide="file-text" style="width:18px;height:18px;"></i> Resources
+        </button>
+        <button class="admin-nav-item" data-tab="questions">
+          <i data-lucide="help-circle" style="width:18px;height:18px;"></i> Questions
+        </button>
+      </nav>
+      <div class="admin-sidebar__footer">
+        <button class="btn btn--ghost" id="admin-logout-btn" style="width: 100%;">
+          <i data-lucide="log-out" style="width:18px;height:18px;"></i> Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      
+      <!-- Subjects Tab -->
+      <section id="tab-subjects" class="admin-tab active">
+        <div class="admin-header">
+          <h1 class="admin-title">Manage Subjects</h1>
+          <button class="btn btn--primary" onclick="openModal('subject-modal')">
+            <i data-lucide="plus" style="width:16px;height:16px;"></i> Add Subject
+          </button>
+        </div>
+        <div class="table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Course ID</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="subjects-tbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Resources Tab -->
+      <section id="tab-resources" class="admin-tab" style="display: none;">
+        <div class="admin-header">
+          <h1 class="admin-title">Manage Resources</h1>
+          <button class="btn btn--primary" onclick="openModal('resource-modal')">
+            <i data-lucide="plus" style="width:16px;height:16px;"></i> Add Resource
+          </button>
+        </div>
+        
+        <div class="filter-bar">
+          <select id="resource-subject-filter" class="form-group__input" onchange="fetchResources()">
+            <option value="">Select Subject</option>
+            <!-- Populated via JS -->
+          </select>
+        </div>
+
+        <div class="table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Type</th>
+                <th>URL</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="resources-tbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Questions Tab -->
+      <section id="tab-questions" class="admin-tab" style="display: none;">
+        <div class="admin-header">
+          <h1 class="admin-title">Manage Questions</h1>
+          <button class="btn btn--primary" onclick="openModal('question-modal')">
+            <i data-lucide="plus" style="width:16px;height:16px;"></i> Add Question
+          </button>
+        </div>
+        
+        <div class="filter-bar">
+          <select id="question-subject-filter" class="form-group__input" onchange="fetchQuestions()">
+            <option value="">Select Subject</option>
+            <!-- Populated via JS -->
+          </select>
+        </div>
+
+        <div class="table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Question</th>
+                <th>Answer</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="questions-tbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Modals -->
+  <!-- Subject Modal -->
+  <div id="subject-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="subject-modal-title">Add Subject</h2>
+        <button class="modal-close" onclick="closeModal('subject-modal')"><i data-lucide="x"></i></button>
+      </div>
+      <form id="subject-form" onsubmit="handleSubjectSubmit(event)">
+        <input type="hidden" id="subject-id">
+        <div class="form-group">
+          <label class="form-group__label">Name</label>
+          <input type="text" id="subject-name" class="form-group__input" required>
+        </div>
+        <div class="form-group">
+          <label class="form-group__label">Course</label>
+          <select id="subject-course-id" class="form-group__input" required></select>
+        </div>
+        <button type="submit" class="btn btn--primary" style="width: 100%; margin-top: 1rem;">Save</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Resource Modal -->
+  <div id="resource-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="resource-modal-title">Add Resource</h2>
+        <button class="modal-close" onclick="closeModal('resource-modal')"><i data-lucide="x"></i></button>
+      </div>
+      <form id="resource-form" onsubmit="handleResourceSubmit(event)">
+        <input type="hidden" id="resource-id">
+        <div class="form-group">
+          <label class="form-group__label">Subject</label>
+          <select id="resource-subject-id" class="form-group__input" required></select>
+        </div>
+        <div class="form-group">
+          <label class="form-group__label">Title</label>
+          <input type="text" id="resource-title" class="form-group__input" required>
+        </div>
+        <div class="form-group">
+          <label class="form-group__label">Type</label>
+          <select id="resource-type" class="form-group__input" required>
+            <option value="note">Note / PDF</option>
+            <option value="pyq">PYQ</option>
+            <option value="mcq">MCQ</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-group__label">Upload PDF (Optional)</label>
+          <input type="file" id="resource-file" class="form-group__input" accept="application/pdf">
+          <div id="upload-progress" style="display: none; margin-top: 5px; font-size: 0.85rem; color: var(--primary-500);">Uploading...</div>
+        </div>
+        <div class="form-group">
+          <label class="form-group__label">Or Manual URL</label>
+          <input type="url" id="resource-url" class="form-group__input" placeholder="https://...">
+        </div>
+        <button type="submit" class="btn btn--primary" id="resource-submit-btn" style="width: 100%; margin-top: 1rem;">Save</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Question Modal -->
+  <div id="question-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="question-modal-title">Add Question</h2>
+        <button class="modal-close" onclick="closeModal('question-modal')"><i data-lucide="x"></i></button>
+      </div>
+      <form id="question-form" onsubmit="handleQuestionSubmit(event)">
+        <input type="hidden" id="question-id">
+        <div class="form-group">
+          <label class="form-group__label">Subject</label>
+          <select id="question-subject-id" class="form-group__input" required></select>
+        </div>
+        <div class="form-group">
+          <label class="form-group__label">Question</label>
+          <input type="text" id="question-text" class="form-group__input" required>
+        </div>
+        <div class="form-group">
+          <label class="form-group__label">Option A</label>
+          <input type="text" id="question-a" class="form-group__input" required>
+        </div>
+        <div class="form-group">
+          <label class="form-group__label">Option B</label>
+          <input type="text" id="question-b" class="form-group__input" required>
+        </div>
+        <div class="form-group">
+          <label class="form-group__label">Option C</label>
+          <input type="text" id="question-c" class="form-group__input" required>
+        </div>
+        <div class="form-group">
+          <label class="form-group__label">Option D</label>
+          <input type="text" id="question-d" class="form-group__input" required>
+        </div>
+        <div class="form-group">
+          <label class="form-group__label">Correct Option</label>
+          <select id="question-correct" class="form-group__input" required>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn--primary" style="width: 100%; margin-top: 1rem;">Save</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

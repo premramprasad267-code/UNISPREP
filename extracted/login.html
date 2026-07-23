@@ -63,20 +63,6 @@
             >
           </div>
 
-          <div class="form-group" style="margin-bottom: 1.5rem;">
-            <label class="form-group__label">Login As</label>
-            <div style="display: flex; gap: 1.5rem; margin-top: 0.5rem;">
-              <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.95rem; color: var(--gray-700);">
-                <input type="radio" name="role" value="student" checked style="accent-color: var(--primary-600); width: 16px; height: 16px;">
-                Student
-              </label>
-              <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.95rem; color: var(--gray-700);">
-                <input type="radio" name="role" value="admin" style="accent-color: var(--primary-600); width: 16px; height: 16px;">
-                Admin
-              </label>
-            </div>
-          </div>
-
           <div class="login__options">
             <label class="login__remember">
               <input type="checkbox" name="remember" id="remember">
@@ -98,7 +84,7 @@
         </div>
 
         <p class="login__signup-text">
-          <a href="register.html" class="login__signup-link">Create an account</a> and start preparing today.
+          <a href="#" class="login__signup-link">Create an account</a> and start preparing today.
         </p>
       </div>
     </div>
@@ -114,62 +100,20 @@
   <script>
     lucide.createIcons();
 
-    document.getElementById('login-form').addEventListener('submit', async function(e) {
+    // Frontend-only form handler — prevents default submission
+    // Backend integration (JWT auth) will replace this
+    document.getElementById('login-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      
+      // No backend integration yet — this is a placeholder
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
-      const submitBtn = this.querySelector('button[type="submit"]');
-
-      const role = document.querySelector('input[name="role"]:checked').value;
 
       if (!email || !password) {
         alert('Please fill in all fields.');
         return;
       }
 
-      // Add loading state
-      const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<i data-lucide="loader-2" class="spin" style="width:18px;height:18px;"></i> Signing In...';
-      submitBtn.disabled = true;
-      lucide.createIcons();
-
-      try {
-        const response = await fetch('http://127.0.0.1:5000/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          if (role === 'admin' && !data.is_admin) {
-             alert('Access denied: You are not authorized as an administrator.');
-             submitBtn.innerHTML = originalText;
-             submitBtn.disabled = false;
-             lucide.createIcons();
-             return;
-          }
-          
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('userName', data.name);
-          
-          if (role === 'admin') {
-              window.location.href = 'admin.html';
-          } else {
-              window.location.href = 'index.html';
-          }
-        } else {
-          alert(data.error || 'Login failed.');
-        }
-      } catch (err) {
-        alert('Error connecting to server. Please try again later.');
-      } finally {
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-        lucide.createIcons();
-      }
+      alert('Login functionality will be available once backend integration is complete.');
     });
   </script>
 </body>

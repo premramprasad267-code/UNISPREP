@@ -62,16 +62,43 @@ async function fetchDashboardData() {
         subjectsContainer.innerHTML = '';
         data.subjects.forEach(sub => {
           subjectsContainer.innerHTML += `
-            <div class="dashboard__subject">
-              <span class="dashboard__subject-icon dashboard__subject-icon--${sub.color}">
-                <i data-lucide="${sub.icon}" style="width:16px;height:16px;"></i>
-              </span>
-              <span class="dashboard__subject-text">${sub.name}</span>
-              <i data-lucide="chevron-right" class="dashboard__subject-arrow" style="width:16px;height:16px;"></i>
-            </div>
+            <a href="subject.html?id=${sub.id}" style="text-decoration: none; color: inherit; display: block; cursor: pointer; transition: transform 0.2s ease;">
+              <div class="dashboard__subject" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                <span class="dashboard__subject-icon dashboard__subject-icon--${sub.color}">
+                  <i data-lucide="${sub.icon}" style="width:16px;height:16px;"></i>
+                </span>
+                <span class="dashboard__subject-text">${sub.name}</span>
+                <i data-lucide="chevron-right" class="dashboard__subject-arrow" style="width:16px;height:16px;"></i>
+              </div>
+            </a>
           `;
         });
         lucide.createIcons();
+      }
+
+      // Update User Progress Stats
+      if (data.stats) {
+        const statsGrid = document.querySelector('.stats__grid');
+        if (statsGrid) {
+          statsGrid.innerHTML = `
+            <div class="stats__item reveal revealed" style="transition: none;">
+              <div class="stats__number"><span class="gradient-text">${data.stats.quizzes_completed}</span></div>
+              <div class="stats__label">Quizzes Completed</div>
+            </div>
+            <div class="stats__item reveal revealed" style="transition: none;">
+              <div class="stats__number"><span class="gradient-text">${data.stats.average_score}</span></div>
+              <div class="stats__label">Average Score</div>
+            </div>
+            <div class="stats__item reveal revealed" style="transition: none;">
+              <div class="stats__number"><span class="gradient-text">${data.stats.total_score}</span></div>
+              <div class="stats__label">Total Points</div>
+            </div>
+            <div class="stats__item reveal revealed" style="transition: none;">
+              <div class="stats__number"><span class="gradient-text">Active</span></div>
+              <div class="stats__label">Status</div>
+            </div>
+          `;
+        }
       }
     }
   } catch (err) {

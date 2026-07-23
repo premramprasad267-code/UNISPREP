@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subject Details — UniPrep</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .subject-page {
+      padding-top: calc(var(--navbar-height) + var(--space-2xl));
+      padding-bottom: var(--space-4xl);
+      min-height: 80vh;
+    }
+    .subject-header {
+      margin-bottom: var(--space-2xl);
+    }
+    .subject-title {
+      font-size: var(--text-4xl);
+      font-weight: 700;
+      color: var(--neutral-900);
+      margin-bottom: var(--space-xs);
+    }
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-lg);
+      margin-bottom: var(--space-3xl);
+    }
+    .resource-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-xl);
+      padding: var(--space-lg);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--neutral-200);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .resource-type {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--primary-600);
+    }
+    .resource-card h3 {
+      font-size: var(--text-lg);
+      margin: 0;
+    }
+    .resource-card a {
+      margin-top: auto;
+      align-self: flex-start;
+    }
+    .section-title {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-lg);
+      padding-bottom: var(--space-xs);
+      border-bottom: 2px solid var(--neutral-200);
+    }
+    .filter-chips {
+      display: flex;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-xl);
+      flex-wrap: wrap;
+    }
+    .chip {
+      padding: 6px 16px;
+      border-radius: 20px;
+      background: var(--bg-primary);
+      border: 1px solid var(--neutral-300);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--neutral-600);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .chip:hover, .chip.active {
+      background: var(--primary-500);
+      color: white;
+      border-color: var(--primary-500);
+    }
+    .quiz-container {
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+    .quiz-option {
+      display: block;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    .quiz-option:hover {
+      background: #f8fafc;
+    }
+    .quiz-option input {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar scrolled" id="navbar" role="navigation">
+    <div class="container navbar__inner">
+      <a href="index.html" class="navbar__logo">
+        <span class="navbar__logo-icon">
+          <i data-lucide="graduation-cap" style="width:20px;height:20px;"></i>
+        </span>
+        UniPrep
+      </a>
+      <div class="navbar__nav" id="nav-menu">
+        <a href="index.html" class="navbar__link">Home</a>
+      </div>
+      <div class="navbar__actions">
+        <!-- Auth will populate this -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="subject-page" style="padding-top: calc(var(--navbar-height) + 2rem); padding-bottom: 4rem;">
+    <div class="container">
+      
+      <!-- Subject Header & Progress -->
+      <div class="subject-header" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
+        <div>
+          <h1 class="subject-title" id="subject-title" style="margin-bottom: 0.5rem; font-size: 2.5rem;">Loading Subject...</h1>
+          <p class="text-neutral-500">Your dedicated learning hub for this subject.</p>
+        </div>
+        <div style="background: white; padding: 1rem 1.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); display: flex; align-items: center; gap: 1rem;">
+          <div>
+             <span style="display: block; font-size: 0.8rem; color: var(--text-secondary); font-weight: 600; text-transform: uppercase;">Subject Mastery</span>
+             <span style="font-size: 1.25rem; font-weight: 700; color: var(--primary-color);" id="subject-score">0 / 0</span>
+          </div>
+          <div style="width: 50px; height: 50px; border-radius: 50%; background: #ecfdf5; color: #10b981; display: flex; align-items: center; justify-content: center;">
+             <i data-lucide="award" style="width: 24px; height: 24px;"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div style="border-bottom: 1px solid var(--border-color); margin-bottom: 2rem; display: flex; gap: 2rem; overflow-x: auto;" id="subject-tabs">
+        <button class="tab-btn active" data-target="materials" style="padding: 1rem 0; font-weight: 600; font-size: 1.1rem; color: var(--primary-color); border-bottom: 3px solid var(--primary-color); background: none; border-top: none; border-left: none; border-right: none; cursor: pointer; white-space: nowrap;">
+           <i data-lucide="book-open" style="width: 18px; margin-right: 8px; vertical-align: middle;"></i> Study Materials
+        </button>
+        <button class="tab-btn" data-target="practice" style="padding: 1rem 0; font-weight: 500; font-size: 1.1rem; color: var(--text-secondary); border-bottom: 3px solid transparent; background: none; border-top: none; border-left: none; border-right: none; cursor: pointer; white-space: nowrap;">
+           <i data-lucide="edit-3" style="width: 18px; margin-right: 8px; vertical-align: middle;"></i> Practice Quiz
+        </button>
+        <button class="tab-btn" data-target="ai" style="padding: 1rem 0; font-weight: 500; font-size: 1.1rem; color: var(--text-secondary); border-bottom: 3px solid transparent; background: none; border-top: none; border-left: none; border-right: none; cursor: pointer; white-space: nowrap;">
+           <i data-lucide="bot" style="width: 18px; margin-right: 8px; vertical-align: middle;"></i> AI Tutor
+        </button>
+      </div>
+
+      <!-- Tab Content: Materials -->
+      <div id="tab-materials" class="tab-content" style="display: block;">
+          <div class="filter-chips" id="filter-chips" style="margin-bottom: 2rem;">
+            <button class="chip active" data-filter="all">All</button>
+            <button class="chip" data-filter="note">Notes</button>
+            <button class="chip" data-filter="pyq">Past Year Questions</button>
+            <button class="chip" data-filter="mcq">Reference MCQs</button>
+          </div>
+          <div class="resource-grid" id="resources-grid">
+            <p class="text-neutral-500">Loading resources...</p>
+          </div>
+      </div>
+
+      <!-- Tab Content: Practice -->
+      <div id="tab-practice" class="tab-content" style="display: none;">
+          <div id="quiz-wrapper">
+            <div class="resource-grid" id="questions-grid">
+              <p class="text-neutral-500">Loading questions...</p>
+            </div>
+          </div>
+      </div>
+
+      <!-- Tab Content: AI Tutor -->
+      <div id="tab-ai" class="tab-content" style="display: none;">
+          <div style="background: white; border-radius: var(--radius-xl); box-shadow: var(--shadow-md); border: 1px solid var(--border-color); overflow: hidden; display: flex; flex-direction: column; height: 600px;">
+             <!-- Header -->
+             <div style="background: var(--bg-primary); padding: 1.5rem; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 1rem;">
+                <div style="width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-400), var(--primary-600)); display: flex; align-items: center; justify-content: center; color: white;">
+                   <i data-lucide="bot" style="width: 24px; height: 24px;"></i>
+                </div>
+                <div>
+                   <h3 style="margin: 0; font-size: 1.25rem;">Subject AI Tutor</h3>
+                   <p style="margin: 0; color: var(--text-secondary); font-size: 0.85rem;">Ask me to explain concepts, generate MCQs, or summarize notes.</p>
+                </div>
+             </div>
+             
+             <!-- Chat History -->
+             <div id="chat-history" style="flex: 1; padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; background: #fafafa;">
+                <!-- Initial Message -->
+                <div style="align-self: flex-start; max-width: 80%; background: white; padding: 1rem 1.25rem; border-radius: 1rem; border-bottom-left-radius: 4px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);">
+                   <p style="margin: 0; line-height: 1.5;">Hello! I am your AI Tutor for <strong id="ai-subject-name">this subject</strong>. How can I help you prepare today?</p>
+                </div>
+             </div>
+             
+             <!-- Input Area -->
+             <div style="padding: 1.5rem; background: white; border-top: 1px solid var(--border-color);">
+                <form id="ai-chat-form" style="display: flex; gap: 1rem;">
+                   <input type="text" id="ai-chat-input" placeholder="Type your question..." style="flex: 1; padding: 1rem 1.5rem; border-radius: 30px; border: 1px solid var(--border-color); font-size: 1rem; outline: none; transition: border-color 0.2s;" required>
+                   <button type="submit" style="width: 50px; height: 50px; border-radius: 50%; background: var(--primary-500); color: white; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s;">
+                      <i data-lucide="send" style="width: 20px; height: 20px;"></i>
+                   </button>
+                </form>
+             </div>
+          </div>
+      </div>
+
+    </div>
+  </main>
+
+
+  <script src="js/subject.js"></script>
+</body>
+</html>
