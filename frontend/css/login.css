@@ -132,7 +132,7 @@
 .form-group__input:focus {
   border-color: var(--primary-400);
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-  background: #ffffff;
+  background: var(--bg-card);
 }
 
 .form-group__input::placeholder {

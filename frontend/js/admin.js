@@ -1,6 +1,6 @@
 // Admin logic for UniPrep
 
-const API_BASE = 'http://127.0.0.1:5000/api';
+const API_BASE = '/api';
 let subjectsData = [];
 let coursesData = [];
 
@@ -45,11 +45,14 @@ async function checkAdminAuth() {
 }
 
 function setupLogout() {
-    document.getElementById('admin-logout-btn').addEventListener('click', () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user_name');
-        window.location.href = 'login.html';
-    });
+    const logoutBtn = document.getElementById('admin-logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user_name');
+            window.location.href = 'login.html';
+        });
+    }
 }
 
 // Tabs
@@ -72,6 +75,7 @@ function setupTabs() {
             if (target === 'subjects') fetchSubjectsTable();
             if (target === 'resources') fetchResources();
             if (target === 'questions') fetchQuestions();
+            if (target === 'users') fetchUsers();
         });
     });
 }
@@ -182,7 +186,63 @@ async function fetchCourses() {
     } catch (e) { console.error(e); }
 }
 
-// --- Subjects ---
+// --- Users Management ---
+async function fetchUsers() {
+    const token = localStorage.getItem('token');
+    const tbody = document.getElementById('users-tbody');
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Loading...</td></tr>';
+    
+    try {
+        const res = await fetch(`${API_BASE}/admin/users`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const json = await res.json();
+        if (res.ok) {
+            tbody.innerHTML = '';
+            json.data.forEach(user => {
+                const roleBadge = user.is_admin ? '<span class="resource-type" style="background:var(--primary-100);color:var(--primary-700)">Admin</span>' : '<span class="resource-type">Student</span>';
+                const date = new Date(user.last_login).toLocaleString();
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${user.name}</td>
+                        <td>${user.email}</td>
+                        <td>${roleBadge}</td>
+                        <td>${date}</td>
+                        <td>
+                            <button onclick="deleteUser('${user.id}')" class="btn btn--danger" style="padding:4px 8px;font-size:12px;">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        } else {
+            tbody.innerHTML = `<tr><td colspan="5" class="error-text">${json.error || 'Failed to load users'}</td></tr>`;
+        }
+    } catch (e) {
+        tbody.innerHTML = '<tr><td colspan="5" class="error-text">Network error</td></tr>';
+    }
+}
+
+async function deleteUser(id) {
+    if (!confirm('Are you sure you want to delete this user?')) return;
+    
+    const token = localStorage.getItem('token');
+    try {
+        const res = await fetch(`${API_BASE}/admin/users/${id}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await res.json();
+        if (res.ok) {
+            fetchUsers();
+        } else {
+            alert(data.error || 'Failed to delete user');
+        }
+    } catch (e) {
+        alert('Network error');
+    }
+}
+
+// --- Subjects Management ---
 async function fetchSubjects() {
     try {
         const res = await apiRequest('/admin/subjects');

@@ -47,7 +47,7 @@ async function fetchDashboardData() {
   if (!token) return;
 
   try {
-    const res = await fetch('http://127.0.0.1:5000/api/dashboard/data', {
+    const res = await fetch('/api/dashboard/data', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (res.ok) {
@@ -100,12 +100,57 @@ async function fetchDashboardData() {
           `;
         }
       }
+      
+      // Fetch Saved Resources
+      fetchSavedResources();
     }
-  } catch (err) {
-    console.error('Failed to fetch dashboard data', err);
+  } catch(e) {
+    console.error("Dashboard fetch error:", e);
   }
 }
 
+async function fetchSavedResources() {
+  const token = localStorage.getItem('token');
+  if (!token) return;
+  const container = document.getElementById('saved-resources-container');
+  if (!container) return;
+
+  try {
+    const res = await fetch('/api/user/saved_resources', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (res.ok) {
+      const json = await res.json();
+      if (json.data && json.data.length > 0) {
+        container.innerHTML = '';
+        json.data.forEach(item => {
+           let icon = 'file-text';
+           if (item.type.toLowerCase() === 'note') icon = 'book';
+           if (item.type.toLowerCase() === 'mcq') icon = 'check-square';
+           if (item.type.toLowerCase() === 'pyq') icon = 'archive';
+           
+           container.innerHTML += `
+            <a href="${item.url}" target="_blank" style="text-decoration:none; color:inherit; display:block;">
+              <div class="dashboard__subject" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                <span class="dashboard__subject-icon" style="background:var(--primary-50); color:var(--primary-600);">
+                  <i data-lucide="${icon}" style="width:16px;height:16px;"></i>
+                </span>
+                <span class="dashboard__subject-text" style="font-size: 0.9rem;">${item.title}</span>
+                <i data-lucide="external-link" class="dashboard__subject-arrow" style="width:14px;height:14px;color:var(--gray-400);"></i>
+              </div>
+            </a>
+           `;
+        });
+        lucide.createIcons();
+      } else {
+        container.innerHTML = '<p class="text-neutral-500" style="font-size: 0.9rem; margin-top: 0;">No saved resources yet.</p>';
+      }
+    }
+  } catch(e) {
+    console.error("Failed to load saved resources:", e);
+    container.innerHTML = '<p class="error-text" style="font-size: 0.9rem;">Could not load bookmarks.</p>';
+  }
+}
 
 
 /* ============================================
@@ -223,3 +268,4 @@ function initRevealAnimations() {
     observer.observe(el);
   });
 }
+

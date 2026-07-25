@@ -5,11 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="UniPrep — One Platform. Every University. Smarter Preparation. Access notes, previous year papers, MCQ practice tests, and AI-powered doubt solving.">
   <meta name="keywords" content="university preparation, study notes, previous year papers, MCQ practice, AI tutor, exam preparation">
-  <title>UniPrep — One Platform. Every University. Smarter Preparation.</title>
+  <title>UniPrep — Your Complete Study & Exam Preparation Platform</title>
+  
+  <meta name="description" content="Prepare better with UniPrep. Access university-specific study resources, previous year question papers, MCQ quizzes, and an AI study assistant.">
+  <meta name="keywords" content="university preparation, exam study, pyq, previous year questions, college notes">
+  
+  <meta property="og:title" content="UniPrep — Your Complete Study Platform">
+  <meta property="og:description" content="Access university-specific study resources, MCQs, and an AI study assistant.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://unisprep.com/">
+  
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Theme Script (Load first to prevent FOUC) -->
+  <script src="js/theme.js"></script>
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -47,6 +60,11 @@
       </div>
 
       <!-- Actions -->
+      <div class="navbar__theme" style="display: flex; align-items: center; margin-right: 1rem;">
+        <button class="btn" style="padding: 8px;" onclick="toggleTheme()" aria-label="Toggle Dark Mode">
+          <i data-lucide="moon" class="theme-toggle-icon" style="width:20px;height:20px;"></i>
+        </button>
+      </div>
       <div class="navbar__actions">
         <a href="login.html" class="btn btn--ghost">Login</a>
         <a href="login.html" class="btn btn--primary">Start Preparing</a>
@@ -142,25 +160,31 @@
               </a>
             </div>
 
+            <!-- Saved Resources -->
+            <span class="dashboard__section-label">Saved Resources</span>
+            <div id="saved-resources-container" style="display:flex; flex-direction:column; gap:8px; margin-bottom:1.5rem;">
+               <p class="text-neutral-500" style="font-size: 0.9rem; margin-top: 0;">Loading saved resources...</p>
+            </div>
+
             <!-- Quick Actions -->
             <span class="dashboard__section-label">Quick Actions</span>
             <div class="dashboard__quick-actions">
-              <div class="dashboard__action">
+              <a href="quick_notes.html" class="dashboard__action" style="text-decoration: none; color: inherit;">
                 <i data-lucide="book-open" class="dashboard__action-icon" style="width:22px;height:22px;"></i>
                 <span class="dashboard__action-label">Notes</span>
-              </div>
-              <div class="dashboard__action">
+              </a>
+              <a href="quick_papers.html" class="dashboard__action" style="text-decoration: none; color: inherit;">
                 <i data-lucide="file-text" class="dashboard__action-icon" style="width:22px;height:22px;"></i>
                 <span class="dashboard__action-label">Question Papers</span>
-              </div>
-              <div class="dashboard__action">
+              </a>
+              <a href="quick_mcq.html" class="dashboard__action" style="text-decoration: none; color: inherit;">
                 <i data-lucide="circle-check-big" class="dashboard__action-icon" style="width:22px;height:22px;"></i>
                 <span class="dashboard__action-label">Practice MCQs</span>
-              </div>
-              <div class="dashboard__action">
+              </a>
+              <a href="ask_ai.html" class="dashboard__action" style="text-decoration: none; color: inherit;">
                 <i data-lucide="bot" class="dashboard__action-icon" style="width:22px;height:22px;"></i>
                 <span class="dashboard__action-label">Ask AI</span>
-              </div>
+              </a>
             </div>
           </div>
         </div>

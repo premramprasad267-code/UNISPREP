@@ -4,11 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Register to UniPrep — Access your university study resources, AI tutor, and MCQ practice.">
-  <title>Register — UniPrep</title>
+  <title>Create Account — UniPrep</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Theme Script (Load first to prevent FOUC) -->
+  <script src="js/theme.js"></script>
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -21,7 +25,12 @@
 
   <main class="login-page">
     <div class="login-card">
-      <div class="login__header">
+      <div class="login__header" style="position: relative;">
+        <div style="position: absolute; top: -10px; right: -10px;">
+          <button class="btn" style="padding: 8px;" onclick="toggleTheme()" aria-label="Toggle Dark Mode">
+            <i data-lucide="moon" class="theme-toggle-icon" style="width:20px;height:20px;"></i>
+          </button>
+        </div>
         <a href="index.html" class="login__logo" aria-label="UniPrep Home">
           <span class="login__logo-icon">
             <i data-lucide="graduation-cap" style="width:22px;height:22px;"></i>
@@ -132,7 +141,7 @@
       lucide.createIcons();
 
       try {
-        const response = await fetch('http://127.0.0.1:5000/api/auth/register', {
+        const response = await fetch('/api/auth/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ name, email, password })

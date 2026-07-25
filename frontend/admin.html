@@ -4,9 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard — UniPrep</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Theme Script (Load first to prevent FOUC) -->
+  <script src="js/theme.js"></script>
+
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <link rel="stylesheet" href="css/style.css">
@@ -35,8 +39,14 @@
         <button class="admin-nav-item" data-tab="questions">
           <i data-lucide="help-circle" style="width:18px;height:18px;"></i> Questions
         </button>
+        <button class="admin-nav-item" data-tab="users">
+          <i data-lucide="users" style="width:18px;height:18px;"></i> Users
+        </button>
       </nav>
-      <div class="admin-sidebar__footer">
+      <div class="admin-sidebar__footer" style="display: flex; flex-direction: column; gap: 8px;">
+        <button class="btn btn--ghost" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;" onclick="toggleTheme()" aria-label="Toggle Dark Mode">
+          <i data-lucide="moon" class="theme-toggle-icon" style="width:18px;height:18px;"></i> Toggle Theme
+        </button>
         <button class="btn btn--ghost" id="admin-logout-btn" style="width: 100%;">
           <i data-lucide="log-out" style="width:18px;height:18px;"></i> Logout
         </button>
@@ -45,6 +55,29 @@
 
     <!-- Main Content -->
     <main class="admin-main">
+      
+      <!-- Users Tab -->
+      <section id="tab-users" class="admin-tab" style="display: none;">
+        <div class="admin-header">
+          <h1 class="admin-title">Manage Users</h1>
+        </div>
+        <div class="table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Last Login</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="users-tbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
       
       <!-- Subjects Tab -->
       <section id="tab-subjects" class="admin-tab active">
@@ -181,20 +214,53 @@
         </div>
         <div class="form-group">
           <label class="form-group__label">Type</label>
-          <select id="resource-type" class="form-group__input" required>
-            <option value="note">Note / PDF</option>
-            <option value="pyq">PYQ</option>
+          <select id="resource-type" class="form-group__input" required onchange="toggleResourceFields()">
+            <option value="note">PDF / Notes</option>
             <option value="mcq">MCQ</option>
           </select>
         </div>
-        <div class="form-group">
-          <label class="form-group__label">Upload PDF (Optional)</label>
-          <input type="file" id="resource-file" class="form-group__input" accept="application/pdf">
-          <div id="upload-progress" style="display: none; margin-top: 5px; font-size: 0.85rem; color: var(--primary-500);">Uploading...</div>
+        <div id="resource-file-fields">
+          <div class="form-group">
+            <label class="form-group__label">Upload PDF (Optional)</label>
+            <input type="file" id="resource-file" class="form-group__input" accept="application/pdf">
+            <div id="upload-progress" style="display: none; margin-top: 5px; font-size: 0.85rem; color: var(--primary-500);">Uploading...</div>
+          </div>
+          <div class="form-group">
+            <label class="form-group__label">Or Manual URL</label>
+            <input type="url" id="resource-url" class="form-group__input" placeholder="https://...">
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-group__label">Or Manual URL</label>
-          <input type="url" id="resource-url" class="form-group__input" placeholder="https://...">
+        
+        <div id="resource-mcq-fields" style="display: none;">
+          <div class="form-group">
+            <label class="form-group__label">Question</label>
+            <input type="text" id="resource-question-text" class="form-group__input">
+          </div>
+          <div class="form-group">
+            <label class="form-group__label">Option A</label>
+            <input type="text" id="resource-question-a" class="form-group__input">
+          </div>
+          <div class="form-group">
+            <label class="form-group__label">Option B</label>
+            <input type="text" id="resource-question-b" class="form-group__input">
+          </div>
+          <div class="form-group">
+            <label class="form-group__label">Option C</label>
+            <input type="text" id="resource-question-c" class="form-group__input">
+          </div>
+          <div class="form-group">
+            <label class="form-group__label">Option D</label>
+            <input type="text" id="resource-question-d" class="form-group__input">
+          </div>
+          <div class="form-group">
+            <label class="form-group__label">Correct Answer</label>
+            <select id="resource-question-correct" class="form-group__input">
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+            </select>
+          </div>
         </div>
         <button type="submit" class="btn btn--primary" id="resource-submit-btn" style="width: 100%; margin-top: 1rem;">Save</button>
       </form>

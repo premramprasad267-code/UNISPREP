@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ask AI — UniPrep</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Theme Script (Load first to prevent FOUC) -->
+  <script src="js/theme.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .subject-page {
+      padding-top: calc(var(--navbar-height) + var(--space-2xl));
+      padding-bottom: var(--space-4xl);
+      min-height: 80vh;
+    }
+    .subject-header {
+      margin-bottom: var(--space-2xl);
+    }
+    .subject-title {
+      font-size: var(--text-4xl);
+      font-weight: 700;
+      color: var(--neutral-900);
+      margin-bottom: var(--space-xs);
+    }
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-lg);
+      margin-bottom: var(--space-3xl);
+    }
+    .resource-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-xl);
+      padding: var(--space-lg);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--neutral-200);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .resource-type {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--primary-600);
+    }
+    .resource-card h3 {
+      font-size: var(--text-lg);
+      margin: 0;
+    }
+    .resource-card a {
+      margin-top: auto;
+      align-self: flex-start;
+    }
+    .section-title {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-lg);
+      padding-bottom: var(--space-xs);
+      border-bottom: 2px solid var(--neutral-200);
+    }
+    .filter-chips {
+      display: flex;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-xl);
+      flex-wrap: wrap;
+    }
+    .chip {
+      padding: 6px 16px;
+      border-radius: 20px;
+      background: var(--bg-primary);
+      border: 1px solid var(--neutral-300);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--neutral-600);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .chip:hover, .chip.active {
+      background: var(--primary-500);
+      color: white;
+      border-color: var(--primary-500);
+    }
+    .quiz-container {
+      background: var(--bg-card);
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+    .quiz-option {
+      display: block;
+      padding: 12px;
+      border: 1px solid var(--neutral-300);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    .quiz-option:hover {
+      background: var(--neutral-100);
+    }
+    .quiz-option input {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar scrolled" id="navbar" role="navigation">
+    <div class="container navbar__inner">
+      <a href="index.html" class="navbar__logo">
+        <span class="navbar__logo-icon">
+          <i data-lucide="graduation-cap" style="width:20px;height:20px;"></i>
+        </span>
+        UniPrep
+      </a>
+      <div class="navbar__nav" id="nav-menu">
+        <a href="index.html" class="navbar__link">Home</a>
+      </div>
+      <div class="navbar__theme" style="display: flex; align-items: center; margin-right: 1rem; margin-left: auto;">
+        <button class="btn" style="padding: 8px;" onclick="toggleTheme()" aria-label="Toggle Dark Mode">
+          <i data-lucide="moon" class="theme-toggle-icon" style="width:20px;height:20px;"></i>
+        </button>
+      </div>
+      <div class="navbar__actions">
+        <!-- Auth will populate this -->
+      </div>
+    </div>
+  </nav>  <main class="subject-page" style="padding-top: calc(var(--navbar-height) + 4rem); padding-bottom: 4rem; display: flex; align-items: center; justify-content: center; text-align: center;">
+    <div class="container" style="max-width: 600px;">
+      
+      <div style="background: var(--bg-card); padding: 3rem; border-radius: var(--radius-xl); box-shadow: var(--shadow-md); border: 1px solid var(--border-color);">
+        <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-400), var(--primary-600)); display: flex; align-items: center; justify-content: center; color: white; margin: 0 auto 1.5rem auto;">
+          <i data-lucide="bot" style="width: 40px; height: 40px;"></i>
+        </div>
+        
+        <h1 style="font-size: var(--text-3xl); font-weight: 700; color: var(--navy-900); margin-bottom: 0.5rem;">🚀 AI Study Assistant</h1>
+        <p style="font-size: var(--text-lg); font-weight: 600; color: var(--primary-600); margin-bottom: 2rem;">Coming Soon in Version 2</p>
+        
+        <p style="font-size: 1.1rem; color: var(--neutral-600); margin-bottom: 1.5rem;">This feature will help students with:</p>
+        
+        <ul style="list-style: none; padding: 0; display: inline-block; text-align: left; margin-bottom: 2.5rem; font-size: 1.1rem; color: var(--neutral-700);">
+          <li style="margin-bottom: 0.75rem;"><i data-lucide="check-circle-2" style="width:18px;height:18px;color:var(--primary-500);margin-right:8px;vertical-align:middle;"></i> Smart explanations</li>
+          <li style="margin-bottom: 0.75rem;"><i data-lucide="check-circle-2" style="width:18px;height:18px;color:var(--primary-500);margin-right:8px;vertical-align:middle;"></i> Doubt solving</li>
+          <li><i data-lucide="check-circle-2" style="width:18px;height:18px;color:var(--primary-500);margin-right:8px;vertical-align:middle;"></i> Exam preparation</li>
+        </ul>
+        
+        <div>
+          <a href="index.html" class="btn btn--primary">Return to Dashboard</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const token = localStorage.getItem('token');
+      const userName = localStorage.getItem('userName');
+      const authContainer = document.querySelector('.navbar__actions');
+      if (token && userName) {
+        if(authContainer) {
+          authContainer.innerHTML = `
+            <span style="font-weight: 500; margin-right: 15px;">Hi, ${userName.split(' ')[0]}</span>
+            <button onclick="logout()" class="btn btn--ghost">Logout</button>
+          `;
+        }
+      } else {
+        window.location.href = 'login.html';
+      }
+      lucide.createIcons();
+    });
+    window.logout = function() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('userName');
+      window.location.href = 'login.html';
+    }
+  </script>
+</body>
+</html>

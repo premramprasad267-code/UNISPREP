@@ -106,6 +106,55 @@
   --navbar-height: 72px;
 }
 
+/* ===== Dark Mode Overrides ===== */
+html.dark {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-card: #1e293b;
+  --bg-elevated: #334155;
+
+  --navy-50: #0f172a;
+  --navy-100: #1e293b;
+  --navy-700: #e2e8f0;
+  --navy-800: #f8fafc;
+  --navy-900: #ffffff;
+
+  --neutral-50: #0f172a;
+  --neutral-100: #1e293b;
+  --neutral-200: #334155;
+  --neutral-300: #475569;
+  --neutral-400: #64748b;
+  --neutral-500: #94a3b8;
+  --neutral-600: #cbd5e1;
+  --neutral-700: #e2e8f0;
+  --neutral-800: #f1f5f9;
+  --neutral-900: #f8fafc;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.6), 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.6), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.5), 0 8px 24px rgba(0, 0, 0, 0.6);
+
+  --gradient-hero: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #0f172a 100%);
+}
+
+html.dark .navbar {
+  background: rgba(15, 23, 42, 0.8);
+}
+
+html.dark .navbar.scrolled {
+  background: rgba(30, 41, 59, 0.95);
+  border-bottom-color: var(--neutral-300);
+}
+
+@media (max-width: 768px) {
+  html.dark .navbar__nav {
+    background: rgba(30, 41, 59, 0.98);
+  }
+}
 
 /* ===== Reset & Base ===== */
 *,
@@ -114,6 +163,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
 html {
@@ -1732,7 +1782,7 @@ input, textarea, select {
 }
 
 .toast {
-  background: white;
+  background: var(--bg-card);
   border-radius: var(--radius-lg);
   padding: 16px 20px;
   box-shadow: var(--shadow-lg);
@@ -1781,3 +1831,4 @@ input, textarea, select {
   font-size: 0.85rem;
   margin: 0;
 }
+

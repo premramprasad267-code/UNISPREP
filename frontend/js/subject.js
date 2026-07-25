@@ -52,20 +52,24 @@ async function fetchSubjectDetails() {
 
   try {
     // Fetch Resources
-    const resResources = await fetch(`http://127.0.0.1:5000/api/resources?subject_id=${subjectId}`, {
+    const resResources = await fetch(`/api/resources?subject_id=${subjectId}`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     
     if (resResources.ok) {
       const json = await resResources.json();
       allResources = json.data || [];
+      const statResourcesEl = document.getElementById('stat-resources');
+      if (statResourcesEl) {
+        statResourcesEl.textContent = allResources.length;
+      }
       renderResources('all');
     } else {
       document.getElementById('resources-grid').innerHTML = '<p class="text-neutral-500">Failed to load resources.</p>';
     }
 
     // Fetch Questions
-    const resQuestions = await fetch(`http://127.0.0.1:5000/api/questions?subject_id=${subjectId}`, {
+    const resQuestions = await fetch(`/api/questions?subject_id=${subjectId}`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     
@@ -161,13 +165,40 @@ function renderResources(filterType) {
             </span>
           </div>
           <h3>${res.title}</h3>
-          <a href="${res.url}" target="_blank" class="btn btn--secondary" style="padding: 6px 12px; font-size: 14px; margin-top: auto;">Open Resource</a>
+          <div style="display:flex; gap:8px; margin-top: auto;">
+            <a href="${res.url}" target="_blank" class="btn btn--secondary" style="padding: 6px 12px; font-size: 14px; flex:1; text-align:center;">Open Resource</a>
+            <button onclick="bookmarkResource(${res.id})" class="btn btn--ghost" style="padding: 6px; border: 1px solid var(--gray-200); border-radius: 8px;" title="Save Resource">
+              <i data-lucide="bookmark" style="width:16px;height:16px;color:var(--gray-500);"></i>
+            </button>
+          </div>
         </div>
       `;
     });
     lucide.createIcons();
   } else {
     resourcesGrid.innerHTML = `<p class="text-neutral-500">No resources found for filter: ${filterType}.</p>`;
+  }
+}
+
+window.bookmarkResource = async function(resourceId) {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    alert("Please login to save resources.");
+    return;
+  }
+  try {
+    const res = await fetch('/api/user/saved_resources', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ resource_id: resourceId })
+    });
+    if (res.ok) {
+      alert("Resource saved to your dashboard!");
+    } else {
+      alert("Failed to save resource or already saved.");
+    }
+  } catch(e) {
+    alert("Network error. Try again.");
   }
 }
 
@@ -324,7 +355,7 @@ async function showQuizResults() {
   const subjectId = urlParams.get('id');
 
   try {
-    const res = await fetch('http://127.0.0.1:5000/api/activity_scores', {
+    const res = await fetch('/api/activity_scores', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
