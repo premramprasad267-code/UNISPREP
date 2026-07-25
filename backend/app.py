@@ -25,10 +25,17 @@ CORS(app)
 supabase_url: str = os.environ.get("SUPABASE_URL", "")
 supabase_key: str = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or os.environ.get("SUPABASE_KEY", "")
 
+# Safe debug logging for deployment troubleshooting
+print(f"DEBUG: SUPABASE_URL detected: {'YES' if supabase_url else 'NO'}")
+print(f"DEBUG: SUPABASE_SERVICE_ROLE_KEY detected: {'YES' if os.environ.get('SUPABASE_SERVICE_ROLE_KEY') else 'NO'}")
+print(f"DEBUG: SUPABASE_KEY detected: {'YES' if os.environ.get('SUPABASE_KEY') else 'NO'}")
+
 try:
+    if not supabase_url or not supabase_key:
+        raise ValueError("Missing Supabase URL or Key in environment variables")
     supabase: Client = create_client(supabase_url, supabase_key)
 except Exception as e:
-    print(f"Warning: Failed to initialize Supabase client. Check your .env file. Error: {e}")
+    print(f"Warning: Failed to initialize Supabase client. Check your environment variables. Error: {e}")
     supabase = None
 
 @app.route('/')
