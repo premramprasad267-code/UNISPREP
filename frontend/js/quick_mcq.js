@@ -38,7 +38,7 @@ window.logout = function() {
 
 async function fetchSubjects(token) {
   try {
-    const dashRes = await fetch('/api/dashboard/data', {
+    const dashRes = await fetch('https://unisprep-bach.onrender.com/api/dashboard/data', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (dashRes.ok) {
@@ -89,7 +89,7 @@ window.selectSubject = async function(subjectId, subjectName) {
   const token = localStorage.getItem('token');
   
   try {
-    const resQuestions = await fetch(`/api/questions?subject_id=${subjectId}`, {
+    const resQuestions = await fetch(`https://unisprep-bach.onrender.com/api/questions?subject_id=${subjectId}`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     
@@ -281,7 +281,7 @@ async function showQuizResults() {
   const token = localStorage.getItem('token');
 
   try {
-    const res = await fetch('/api/activity_scores', {
+    const res = await fetch('https://unisprep-bach.onrender.com/api/activity_scores', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

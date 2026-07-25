@@ -38,7 +38,7 @@ window.logout = function() {
 async function fetchSubjectsAndResources(token) {
   try {
     // 1. Fetch subjects from dashboard data
-    const dashRes = await fetch('/api/dashboard/data', {
+    const dashRes = await fetch('https://unisprep-bach.onrender.com/api/dashboard/data', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (dashRes.ok) {
@@ -48,7 +48,7 @@ async function fetchSubjectsAndResources(token) {
     }
 
     // 2. Fetch all resources
-    const resRes = await fetch('/api/resources', {
+    const resRes = await fetch('https://unisprep-bach.onrender.com/api/resources', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (resRes.ok) {
@@ -147,7 +147,7 @@ window.bookmarkResource = async function(resourceId) {
     return;
   }
   try {
-    const res = await fetch('/api/user/saved_resources', {
+    const res = await fetch('https://unisprep-bach.onrender.com/api/user/saved_resources', {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({ resource_id: resourceId })

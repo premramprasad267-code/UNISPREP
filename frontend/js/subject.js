@@ -52,7 +52,7 @@ async function fetchSubjectDetails() {
 
   try {
     // Fetch Resources
-    const resResources = await fetch(`/api/resources?subject_id=${subjectId}`, {
+    const resResources = await fetch(`https://unisprep-bach.onrender.com/api/resources?subject_id=${subjectId}`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     
@@ -69,7 +69,7 @@ async function fetchSubjectDetails() {
     }
 
     // Fetch Questions
-    const resQuestions = await fetch(`/api/questions?subject_id=${subjectId}`, {
+    const resQuestions = await fetch(`https://unisprep-bach.onrender.com/api/questions?subject_id=${subjectId}`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     
@@ -187,7 +187,7 @@ window.bookmarkResource = async function(resourceId) {
     return;
   }
   try {
-    const res = await fetch('/api/user/saved_resources', {
+    const res = await fetch('https://unisprep-bach.onrender.com/api/user/saved_resources', {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({ resource_id: resourceId })
@@ -355,7 +355,7 @@ async function showQuizResults() {
   const subjectId = urlParams.get('id');
 
   try {
-    const res = await fetch('/api/activity_scores', {
+    const res = await fetch('https://unisprep-bach.onrender.com/api/activity_scores', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

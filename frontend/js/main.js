@@ -47,7 +47,7 @@ async function fetchDashboardData() {
   if (!token) return;
 
   try {
-    const res = await fetch('/api/dashboard/data', {
+    const res = await fetch('https://unisprep-bach.onrender.com/api/dashboard/data', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (res.ok) {
@@ -116,7 +116,7 @@ async function fetchSavedResources() {
   if (!container) return;
 
   try {
-    const res = await fetch('/api/user/saved_resources', {
+    const res = await fetch('https://unisprep-bach.onrender.com/api/user/saved_resources', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (res.ok) {
