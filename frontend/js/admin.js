@@ -1,6 +1,6 @@
 // Admin logic for UniPrep
 
-const API_BASE = '/api';
+const API_BASE = 'https://unisprep-bach.onrender.com/api';
 let subjectsData = [];
 let coursesData = [];
 
@@ -95,6 +95,23 @@ function openModal(id, mode = 'add') {
         document.getElementById(`${id}-title`).innerText = `Edit ${id.split('-')[0]}`;
     }
     populateSubjectDropdowns();
+    if (id === 'resource-modal') toggleResourceFields();
+}
+
+function toggleResourceFields() {
+    const typeSelect = document.getElementById('resource-type');
+    const fileFields = document.getElementById('resource-file-fields');
+    const mcqFields = document.getElementById('resource-mcq-fields');
+    
+    if (typeSelect && fileFields && mcqFields) {
+        if (typeSelect.value === 'mcq') {
+            fileFields.style.display = 'none';
+            mcqFields.style.display = 'block';
+        } else {
+            fileFields.style.display = 'block';
+            mcqFields.style.display = 'none';
+        }
+    }
 }
 
 function closeModal(id) {

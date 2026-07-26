@@ -164,7 +164,7 @@
           localStorage.setItem('token', data.token);
           localStorage.setItem('userName', data.name);
           
-          if (role === 'admin') {
+          if (data.is_admin) {
               window.location.href = 'admin.html';
           } else {
               window.location.href = 'index.html';
