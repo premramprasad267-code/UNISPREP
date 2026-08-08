@@ -24,105 +24,303 @@
 <body>
 
   <main class="login-page">
-    <div class="login-card">
-      <div class="login__header" style="position: relative;">
-        <div style="position: absolute; top: -10px; right: -10px;">
-          <button class="btn" style="padding: 8px;" onclick="toggleTheme()" aria-label="Toggle Dark Mode">
-            <i data-lucide="moon" class="theme-toggle-icon" style="width:20px;height:20px;"></i>
-          </button>
+    <!-- Subtle SaaS Background Dot Grid -->
+    <div class="login-grid-pattern" aria-hidden="true"></div>
+
+    <div class="login-layout">
+
+      <!-- ============================================
+           Left Side — Interactive Animated Parallax Hero
+           ============================================ -->
+      <section class="login-hero-side" id="hero-parallax-section">
+        
+        <!-- Header Logo -->
+        <div class="login-hero__top">
+          <a href="index.html" class="login-hero__logo" aria-label="UniPrep Home">
+            <span class="login-hero__logo-icon">
+              <i data-lucide="graduation-cap" style="width:24px;height:24px;"></i>
+            </span>
+            UniPrep
+          </a>
         </div>
-        <a href="index.html" class="login__logo" aria-label="UniPrep Home">
-          <span class="login__logo-icon">
-            <i data-lucide="graduation-cap" style="width:22px;height:22px;"></i>
-          </span>
-          UniPrep
-        </a>
-        <h1 class="login__title">Welcome Back</h1>
-        <p class="login__subtitle">Sign in to access your study resources</p>
-      </div>
 
-      <div class="login__body">
-        <!-- Login form — frontend-only, no backend integration yet -->
-        <form class="login__form" id="login-form" action="#" method="POST" novalidate>
-          <div class="form-group">
-            <label for="email" class="form-group__label">Email Address</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              class="form-group__input"
-              placeholder="you@university.edu"
-              autocomplete="email"
-              required
-              aria-required="true"
-            >
-          </div>
-
-          <div class="form-group">
-            <label for="password" class="form-group__label">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              class="form-group__input"
-              placeholder="Enter your password"
-              autocomplete="current-password"
-              required
-              aria-required="true"
-            >
-          </div>
-
-          <div class="form-group" style="margin-bottom: 1.5rem;">
-            <label class="form-group__label">Login As</label>
-            <div style="display: flex; gap: 1.5rem; margin-top: 0.5rem;">
-              <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.95rem; color: var(--gray-700);">
-                <input type="radio" name="role" value="student" checked style="accent-color: var(--primary-600); width: 16px; height: 16px;">
-                Student
-              </label>
-              <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.95rem; color: var(--gray-700);">
-                <input type="radio" name="role" value="admin" style="accent-color: var(--primary-600); width: 16px; height: 16px;">
-                Admin
-              </label>
+        <!-- Floating Parallax Scene (Interactive 3D Mouse Movement) -->
+        <div class="login-parallax-scene" aria-hidden="true">
+          
+          <!-- Floating Glass Card: AI Tutor -->
+          <div class="parallax-item" data-depth="0.06" style="top: 18%; left: 8%;">
+            <div class="glass-floating-card float-idle-1">
+              <div class="glass-floating-card__icon glass-floating-card__icon--purple">
+                <i data-lucide="sparkles" style="width:20px;height:20px;"></i>
+              </div>
+              <div class="glass-floating-card__text">
+                <span class="glass-floating-card__title">UniPrep AI</span>
+                <span class="glass-floating-card__sub">Instant Doubt Solving</span>
+              </div>
             </div>
           </div>
 
-          <div class="login__options">
-            <label class="login__remember">
-              <input type="checkbox" name="remember" id="remember">
-              Remember me
-            </label>
-            <a href="#" class="login__forgot">Forgot password?</a>
+          <!-- Floating Glass Card: Past Papers -->
+          <div class="parallax-item" data-depth="-0.045" style="top: 28%; right: 12%;">
+            <div class="glass-floating-card float-idle-2">
+              <div class="glass-floating-card__icon glass-floating-card__icon--blue">
+                <i data-lucide="book-open" style="width:20px;height:20px;"></i>
+              </div>
+              <div class="glass-floating-card__text">
+                <span class="glass-floating-card__title">500+ Past Papers</span>
+                <span class="glass-floating-card__sub">Semester-wise Archives</span>
+              </div>
+            </div>
           </div>
 
-          <button type="submit" class="btn btn--primary btn--lg login__submit">
-            <i data-lucide="log-in" style="width:18px;height:18px;"></i>
-            Sign In
-          </button>
-        </form>
+          <!-- Floating Glass Card: Practice Quizzes -->
+          <div class="parallax-item" data-depth="0.05" style="bottom: 22%; left: 14%;">
+            <div class="glass-floating-card float-idle-3">
+              <div class="glass-floating-card__icon glass-floating-card__icon--emerald">
+                <i data-lucide="award" style="width:20px;height:20px;"></i>
+              </div>
+              <div class="glass-floating-card__text">
+                <span class="glass-floating-card__title">Interactive MCQs</span>
+                <span class="glass-floating-card__sub">Real-time Assessment</span>
+              </div>
+            </div>
+          </div>
 
-        <div class="login__divider">
-          <span class="login__divider-line"></span>
-          <span class="login__divider-text">New to UniPrep?</span>
-          <span class="login__divider-line"></span>
+          <!-- Floating Orb: Laptop -->
+          <div class="parallax-item" data-depth="-0.07" style="top: 50%; right: 18%;">
+            <div class="glass-floating-orb glass-floating-orb--cyan float-idle-4">
+              <i data-lucide="laptop" style="width:24px;height:24px;"></i>
+            </div>
+          </div>
+
+          <!-- Floating Orb: Code Brackets -->
+          <div class="parallax-item" data-depth="0.08" style="top: 40%; left: 42%;">
+            <div class="glass-floating-orb glass-floating-orb--pink float-idle-1">
+              <i data-lucide="code" style="width:22px;height:22px;"></i>
+            </div>
+          </div>
+
+          <!-- Floating Orb: Database -->
+          <div class="parallax-item" data-depth="-0.035" style="bottom: 12%; right: 28%;">
+            <div class="glass-floating-orb glass-floating-orb--amber float-idle-2">
+              <i data-lucide="database" style="width:22px;height:22px;"></i>
+            </div>
+          </div>
+
+          <!-- Floating Orb: Brain -->
+          <div class="parallax-item" data-depth="0.04" style="top: 12%; left: 45%;">
+            <div class="glass-floating-orb glass-floating-orb--primary float-idle-3">
+              <i data-lucide="brain" style="width:22px;height:22px;"></i>
+            </div>
+          </div>
+
         </div>
 
-        <p class="login__signup-text">
-          <a href="register.html" class="login__signup-link">Create an account</a> and start preparing today.
-        </p>
-      </div>
-    </div>
+        <!-- Main Hero Text Content -->
+        <div class="login-hero__content">
+          <div class="login-hero__badge">
+            <i data-lucide="sparkles" style="width:16px;height:16px;"></i>
+            AI-Powered University Preparation
+          </div>
+          <h1 class="login-hero__title">
+            Master Your Exams with <span class="login-hero__title-gradient">Intelligence</span>
+          </h1>
+          <p class="login-hero__description">
+            Access past question papers, syllabus-aligned study notes, interactive MCQ mock tests, and smart AI tutoring tailored for university success.
+          </p>
 
-    <div class="login__back">
-      <a href="index.html" class="login__back-link">
-        <i data-lucide="arrow-left" style="width:16px;height:16px;"></i>
-        Back to Home
-      </a>
+          <div class="login-hero__features">
+            <div class="login-hero__feature-chip">
+              <i data-lucide="file-check" style="width:16px;height:16px;"></i>
+              Curated Notes
+            </div>
+            <div class="login-hero__feature-chip">
+              <i data-lucide="bot" style="width:16px;height:16px;"></i>
+              24/7 AI Assistant
+            </div>
+            <div class="login-hero__feature-chip">
+              <i data-lucide="trending-up" style="width:16px;height:16px;"></i>
+              Progress Tracking
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="login-hero__footer">
+          &copy; 2026 UniPrep Platform. All rights reserved.
+        </div>
+
+      </section>
+
+      <!-- ============================================
+           Right Side — Login Interface Panel
+           ============================================ -->
+      <section class="login-form-side">
+        <div class="login-form-container">
+          
+          <div class="login-card__top">
+            <a href="index.html" class="login-card__brand" aria-label="UniPrep Home">
+              <span class="login-hero__logo-icon" style="width:36px;height:36px;">
+                <i data-lucide="graduation-cap" style="width:18px;height:18px;"></i>
+              </span>
+              UniPrep
+            </a>
+            <button class="login-card__theme-btn" onclick="toggleTheme()" aria-label="Toggle Dark Mode">
+              <i data-lucide="moon" class="theme-toggle-icon" style="width:18px;height:18px;"></i>
+            </button>
+          </div>
+
+          <h2 class="login__title">Welcome Back</h2>
+          <p class="login__subtitle">Sign in to access your study dashboard</p>
+
+          <form class="login__form" id="login-form" action="#" method="POST" novalidate>
+            <div class="form-group">
+              <label for="email" class="form-group__label">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-group__input"
+                placeholder="you@university.edu"
+                autocomplete="email"
+                required
+                aria-required="true"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="password" class="form-group__label">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-group__input"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required
+                aria-required="true"
+              >
+            </div>
+
+            <div class="form-group login__role-container">
+              <label class="form-group__label">Login As</label>
+              <div class="login__role-options">
+                <label class="login__role-label">
+                  <input type="radio" name="role" value="student" checked class="login__role-input">
+                  Student
+                </label>
+                <label class="login__role-label">
+                  <input type="radio" name="role" value="admin" class="login__role-input">
+                  Admin
+                </label>
+              </div>
+            </div>
+
+            <div class="login__options">
+              <label class="login__remember">
+                <input type="checkbox" name="remember" id="remember">
+                Remember me
+              </label>
+              <a href="#" class="login__forgot">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="login__submit">
+              <i data-lucide="log-in" style="width:18px;height:18px;"></i>
+              Sign In
+            </button>
+          </form>
+
+          <div class="login__divider">
+            <span class="login__divider-line"></span>
+            <span class="login__divider-text">New to UniPrep?</span>
+            <span class="login__divider-line"></span>
+          </div>
+
+          <p class="login__signup-text">
+            <a href="register.html" class="login__signup-link">Create an account</a> and start preparing today.
+          </p>
+
+          <div class="login__back">
+            <a href="index.html" class="login__back-link">
+              <i data-lucide="arrow-left" style="width:16px;height:16px;"></i>
+              Back to Home
+            </a>
+          </div>
+
+        </div>
+      </section>
+
     </div>
   </main>
 
   <script>
     lucide.createIcons();
 
+    // ============================================
+    // Desktop Mouse Movement 3D Parallax Effect (60 FPS)
+    // ============================================
+    (function initParallax() {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) return;
+
+      const items = document.querySelectorAll('.parallax-item');
+      if (!items.length) return;
+
+      let mouseX = 0;
+      let mouseY = 0;
+      let targetX = 0;
+      let targetY = 0;
+      let rafId = null;
+
+      function onMouseMove(e) {
+        // Run parallax on desktop screen widths
+        if (window.innerWidth <= 992) return;
+
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+        targetX = e.clientX - centerX;
+        targetY = e.clientY - centerY;
+
+        if (!rafId) {
+          rafId = requestAnimationFrame(updateParallax);
+        }
+      }
+
+      function updateParallax() {
+        // Smooth lerping interpolation
+        mouseX += (targetX - mouseX) * 0.08;
+        mouseY += (targetY - mouseY) * 0.08;
+
+        for (let i = 0; i < items.length; i++) {
+          const item = items[i];
+          const depth = parseFloat(item.getAttribute('data-depth')) || 0.04;
+          const moveX = (mouseX * depth).toFixed(2);
+          const moveY = (mouseY * depth).toFixed(2);
+          item.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+        }
+
+        if (Math.abs(targetX - mouseX) > 0.1 || Math.abs(targetY - mouseY) > 0.1) {
+          rafId = requestAnimationFrame(updateParallax);
+        } else {
+          rafId = null;
+        }
+      }
+
+      function onMouseLeave() {
+        targetX = 0;
+        targetY = 0;
+        if (!rafId) {
+          rafId = requestAnimationFrame(updateParallax);
+        }
+      }
+
+      window.addEventListener('mousemove', onMouseMove, { passive: true });
+      document.addEventListener('mouseleave', onMouseLeave, { passive: true });
+    })();
+
+    // ============================================
+    // Authentication Logic & Form Submission
+    // ============================================
     document.getElementById('login-form').addEventListener('submit', async function(e) {
       e.preventDefault();
       
@@ -138,7 +336,7 @@
       }
 
       // Add loading state
-      const originalText = submitBtn.innerHTML;
+      const originalHtml = submitBtn.innerHTML;
       submitBtn.innerHTML = '<i data-lucide="loader-2" class="spin" style="width:18px;height:18px;"></i> Signing In...';
       submitBtn.disabled = true;
       lucide.createIcons();
@@ -155,7 +353,7 @@
         if (response.ok) {
           if (role === 'admin' && !data.is_admin) {
              alert('Access denied: You are not authorized as an administrator.');
-             submitBtn.innerHTML = originalText;
+             submitBtn.innerHTML = originalHtml;
              submitBtn.disabled = false;
              lucide.createIcons();
              return;
@@ -175,7 +373,7 @@
       } catch (err) {
         alert('Error connecting to server. Please try again later.');
       } finally {
-        submitBtn.innerHTML = originalText;
+        submitBtn.innerHTML = originalHtml;
         submitBtn.disabled = false;
         lucide.createIcons();
       }
