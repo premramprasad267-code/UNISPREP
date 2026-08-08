@@ -190,16 +190,27 @@
 
             <div class="form-group">
               <label for="password" class="form-group__label">Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                class="form-group__input"
-                placeholder="Enter your password"
-                autocomplete="current-password"
-                required
-                aria-required="true"
-              >
+              <div class="password-input-wrapper">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-group__input"
+                  placeholder="Enter your password"
+                  autocomplete="current-password"
+                  required
+                  aria-required="true"
+                >
+                <button
+                  type="button"
+                  id="toggle-password-btn"
+                  class="password-toggle-btn"
+                  aria-label="Show password"
+                  tabindex="-1"
+                >
+                  <i data-lucide="eye" style="width:18px;height:18px;"></i>
+                </button>
+              </div>
             </div>
 
             <div class="form-group login__role-container">
@@ -317,6 +328,22 @@
       window.addEventListener('mousemove', onMouseMove, { passive: true });
       document.addEventListener('mouseleave', onMouseLeave, { passive: true });
     })();
+
+    // ============================================
+    // Password Visibility Toggle
+    // ============================================
+    const togglePasswordBtn = document.getElementById('toggle-password-btn');
+    const passwordInput = document.getElementById('password');
+    if (togglePasswordBtn && passwordInput) {
+      togglePasswordBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const isPassword = passwordInput.type === 'password';
+        passwordInput.type = isPassword ? 'text' : 'password';
+        this.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+        this.innerHTML = `<i data-lucide="${isPassword ? 'eye-off' : 'eye'}" style="width:18px;height:18px;"></i>`;
+        lucide.createIcons();
+      });
+    }
 
     // ============================================
     // Authentication Logic & Form Submission

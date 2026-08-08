@@ -401,6 +401,46 @@
   color: #64748b;
 }
 
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.password-input-wrapper .form-group__input {
+  width: 100%;
+  padding-right: 44px;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  z-index: 2;
+}
+
+.password-toggle-btn:hover {
+  color: #ffffff;
+  background: rgba(167, 139, 250, 0.15);
+}
+
+.password-toggle-btn:focus-visible {
+  outline: 2px solid #a78bfa;
+  outline-offset: 1px;
+}
+
 /* Role Radio Selection */
 .login__role-container {
   margin-top: 2px;
